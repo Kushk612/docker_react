@@ -7,3 +7,16 @@ before_install:
 
 script: 
   - docker run kush/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1" #region name
+  app: "docker" #when the elastic bean created env will be there
+  env: "Docker-env" #when the elastic bean created env will be there
+  bucket_name: "elasticbeanstalk-us-east-1-2345676452642" #within s3
+  docker_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SCERET_KEY"
